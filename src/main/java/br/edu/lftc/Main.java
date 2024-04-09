@@ -1,19 +1,59 @@
 package br.edu.lftc;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Main {
+    public static Scanner leitor = new Scanner(System.in);
+    public static AutomnFDeterminate afd;
+    public static AutomnFdWithNull afie;
+    public static AutomnFIndeterminate afi;
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        boolean solved = true;
+        int estados_main, qt_letras_main;
+        String[] letras_main;
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        do {
+            System.out.println("""
+                    ---------------------------
+                    Menu de Automatos
+                    ---------------------------
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
-        }
+                    1 - Automato Finito Determinado;
+                    2 - Automato Finido Indeterminado;
+                    3 - Automato Finito Indeterminado com mov nulo;
+                    0- Sair
+                    """);
+            int option = Integer.parseInt(leitor.next());
+            if (option>=0 || option<=3) {
+                System.out.println("Quantas letras tem seu alfabeto? ");
+                qt_letras_main = Integer.parseInt(leitor.next());
+                System.out.println("Quantas estados tem seu automato? ");
+                estados_main = Integer.parseInt(leitor.next());
+                System.out.println("Quais as letras do seu alfabeto? ");
+                letras_main = leitor.next().split(",");
+                System.out.println("Quais os estados finais do seu autonomo? ");
+                System.out.println(Arrays.asList(letras_main));
+                switch (option) {
+                    case 1:
+                        afd.init();
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        System.out.println("Entrada não reconhecida, tente novamente.");
+                }
+            }
+        }while(solved !=true);
     }
+
+
 }
