@@ -1,6 +1,8 @@
 package br.edu.lftc;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class AFD {
@@ -15,20 +17,21 @@ public class AFD {
         ArrayList<String> alfabeto = new ArrayList<>();
         do {
             alfabeto.add(usuario.nextLine());
-        } while (alfabeto.get(alfabeto.size()-1) != "");
+        } while (!alfabeto.get(alfabeto.size()-1).isEmpty());
 
         System.out.println("Informe os estados: ");
         ArrayList<String> estados = new ArrayList<>();
         do {
             estados.add(usuario.nextLine());
-        } while (estados.get(estados.size()-1) != "");
+        } while (!alfabeto.get(estados.size()-1).isEmpty());
 
 
         System.out.println("Estados finais: ");
         ArrayList<String> finais = new ArrayList<>();
         do {
             finais.add(usuario.nextLine());
-        } while (finais.get(finais.size()-1) != "");
+        } while (!alfabeto.get(finais.size()-1).isEmpty());
+        finais.remove(finais.size()-1);
 
         System.out.println("Estado inicial: ");
         int estado_inicial = usuario.nextInt();
@@ -42,28 +45,38 @@ public class AFD {
                 transicao[i][j] = usuario.nextInt();
             }
         }
+
         usuario.nextLine();
-        System.out.println("\nInforme uma palavra:");
+        Map<String, String> palavras = new HashMap<String, String>();
+        System.out.println("\nInforme as palavras:");
         String palavra = usuario.nextLine();
 
-        int posicao = 0;
-        int estado = estado_inicial;
-        char simbolo;
+        while (!palavra.isEmpty()) {
 
-        int simboloint;
-        while (posicao<palavra.length()) {
-            simbolo = palavra.charAt(posicao);
-            simboloint = Integer.parseInt(simbolo+"");
-            estado = transicao[estado][simboloint];
-            posicao++;
+            int posicao = 0;
+            int estado = estado_inicial;
+            char simbolo;
+
+            while (posicao < palavra.length()) {
+                simbolo = palavra.charAt(posicao);
+                int simboloint = Integer.parseInt(simbolo+"");
+                estado = transicao[estado][simboloint];
+                posicao++;
+            }
+
+            boolean check = false;
+            for (String i: finais) {
+                if (estado == Integer.parseInt(i)) {check = true;}
+            }
+            if (check) palavras.put(palavra, "aceita!");
+            else palavras.put(palavra, "rejeitada.");
+
+            palavra = usuario.nextLine();
         }
 
-        boolean check = false;
-        finais.remove(finais.size()-1);
-        for (String i: finais) {
-            if (estado == Integer.parseInt(i+"")) {check = true;}
+        System.out.println("Resultados: ");
+        for (String r: palavras.keySet()) {
+            System.out.println("A palavra: " + r + " foi " + palavras.get(r));
         }
-        if (check) System.out.println("Palavra aceita!");
-        else System.out.println("Palavra rejeitada.");
     }
 }
