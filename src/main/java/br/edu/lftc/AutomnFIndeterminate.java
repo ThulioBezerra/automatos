@@ -17,7 +17,7 @@ public class AutomnFIndeterminate implements InterfaceAutonomo{
     }
 
     @Override
-    public boolean isPossible(String[] alfabeto) {
+    public boolean isPossible(String alfabeto) {
         return false;
     }
 
@@ -27,7 +27,7 @@ public class AutomnFIndeterminate implements InterfaceAutonomo{
     }
 
     @Override
-    public int setTransition(int qi, char element, int qf) {
-        return 0;
+    public void setTransition(int qi, String element, int qf) {
+
     }
 }

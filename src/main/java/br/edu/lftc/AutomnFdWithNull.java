@@ -16,7 +16,7 @@ public class AutomnFdWithNull implements InterfaceAutonomo{
         transictionTable = new String[num_estados][qt_letras];
     }
     @Override
-    public boolean isPossible(String[] alfabeto) {
+    public boolean isPossible(String alfabeto) {
         return false;
     }
 
@@ -26,7 +26,7 @@ public class AutomnFdWithNull implements InterfaceAutonomo{
     }
 
     @Override
-    public int setTransition(int qi, char element, int qf) {
-        return 0;
+    public void setTransition(int qi, String element, int qf) {
+
     }
 }
