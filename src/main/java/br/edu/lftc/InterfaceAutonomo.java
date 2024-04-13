@@ -1,8 +1,8 @@
 package br.edu.lftc;
 
 public interface InterfaceAutonomo {
-    public boolean isPossible(String alfabeto);
-    public int editAutonom(int estados, int num_letras, String[] alfabetocompleto);
-    public void setTransition(int qi, String element, int qf);
+     boolean isPossible(String alfabeto);
+     int editAutonom(int estados, int num_letras, String[] alfabetocompleto);
+     void setTransition(int qi, String element, int qf);
 
 }
