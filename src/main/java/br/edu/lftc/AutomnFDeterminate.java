@@ -20,8 +20,6 @@ public class AutomnFDeterminate implements InterfaceAutonomo{
         /* * a  b
         * q0 0  1
         * q1 1  0
-        *
-        *
         * */
     }
     public Scanner leitor = new Scanner(System.in);

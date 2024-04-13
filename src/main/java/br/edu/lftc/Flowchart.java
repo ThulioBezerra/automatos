@@ -1,5 +1,6 @@
 package br.edu.lftc;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Flowchart {
@@ -25,20 +26,27 @@ public class Flowchart {
             option = Integer.parseInt(leitor.next());
             createAuto(option);
             createTransitions(option);
-            System.out.println("Digite uma cadeia para seu novo automato!");
-            cadeia = leitor.next();
-            switch (option){
-                case 1:
-                    afd.isPossible(cadeia);
-                    break;
-                case 2:
-                    afn.isPossible(cadeia);
-                    break;
-                case 3:
-                    afne.isPossible(cadeia);
-                    break;
-            }
-        }while(solved !=true);
+            char opcao;
+            do {
+                System.out.println("Digite uma cadeia para seu novo automato!");
+                cadeia = leitor.next();
+
+                switch (option) {
+                    case 1:
+                        afd.isPossible(cadeia);
+                        break;
+                    case 2:
+                        afn.isPossible(cadeia);
+                        break;
+                    case 3:
+                        afne.isPossible(cadeia);
+                        break;
+                }
+                System.out.println("Quer digitar uma nova? [S/N]");
+                opcao = leitor.next().toLowerCase().charAt(0);
+            }while(opcao!='n');
+            } while (solved != true);
+
     }
 
     public static void createAuto(int typeAuto){
@@ -88,18 +96,20 @@ public class Flowchart {
                 }while(answer!='n');
                 break;
             case 2:
-                int[] index = new int[afn.num_estados];
+                afn.createTransition();
+                int[][] estadosPossiveis = new int[afn.qt_letras][afn.num_estados];
                 do{
+                    int posicao=0;
                     System.out.println("Digite as transições entre os estados. Por exemplo: 0,a,1");
                     String[] data = leitor.next().split(",");
                     //Declarações
                     int qi = Integer.parseInt(data[0]);
                     String element = data[1];
                     int qf = Integer.parseInt(data[2]);
-                    int posicao = index[Integer.parseInt(data[0])];
+                    posicao = estadosPossiveis[Arrays.asList(afn.alfabeto).indexOf(element)][qi];
                     //Função + incrementação.
                     afn.setTransition(qi, element, qf, posicao);
-                    index[Integer.parseInt(data[0])] = posicao++;
+                    estadosPossiveis[Arrays.asList(afn.alfabeto).indexOf(element)][qi]++;
                     System.out.println("Deseja continuar? [S/N]");
                     answer = leitor.next().toLowerCase().charAt(0);
                 }while(answer!='n');

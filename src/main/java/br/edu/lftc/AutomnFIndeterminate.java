@@ -20,8 +20,11 @@ public class AutomnFIndeterminate implements InterfaceAutonomo{
 
     @Override
     public boolean isPossible(String cadeia) {
-        int[] state_tests = {};
+        int[] state_tests = {0}; //q0
         int[] finalStates = test(cadeia, state_tests, 0);
+        if(aceppt(finalStates)){
+            System.out.println("Palavra aceita!");
+        }else System.out.println("Rejeitada!");
         return false;
     }
 
@@ -31,12 +34,13 @@ public class AutomnFIndeterminate implements InterfaceAutonomo{
                 return stateTests;
             }else {
                 System.out.println("<<<BackTrack>>> fim da cadeia");
+                return null;
             }
         }
-        Integer simbolo = Arrays.asList(this.alfabeto).indexOf(cadeia.charAt(i));
+        Integer simbolo = Arrays.asList(this.alfabeto).indexOf(cadeia.charAt(i)+ "");
         for (int j = 0; j < num_estados ; j++) {
-            int[] novosEstados = transictionTable[i][simbolo];
-            if (novosEstados.length!=0){
+            int[] novosEstados = transictionTable[j][simbolo];
+            if (novosEstados.length==0){
                 return null;
             }
             int[] transicoes = test(cadeia,novosEstados,i+1);
@@ -68,8 +72,18 @@ public class AutomnFIndeterminate implements InterfaceAutonomo{
     public void setTransition(int qi, String element, int qf) {
 
     }
-
+    
     public void setTransition(int qi, String element, int qf, int i) {
         transictionTable[qi][Arrays.asList(alfabeto).indexOf(element)][i] = qf;
+    }
+
+    public void createTransition() {
+        for (int i = 0; i < num_estados; i++) {
+            for (int j = 0; j < qt_letras; j++) {
+                for (int k = 0; k < num_estados; k++) {
+                    transictionTable[i][j][k] = -1;
+                }
+            }
+        }
     }
 }
