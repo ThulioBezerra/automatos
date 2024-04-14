@@ -1,7 +1,6 @@
 package br.edu.lftc;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class AutomnFIndeterminate implements InterfaceAutonomo{
     int num_of_states;

@@ -1,7 +1,5 @@
 package br.edu.lftc;
 
-import java.util.Scanner;
-
 public class AutomnFdWithNull implements InterfaceAutonomo{
     int num_of_states;
     int num_of_letters;

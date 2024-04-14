@@ -96,7 +96,7 @@ public class Flowchart {
                 break;
             case 2:
                 afn.createTransition();
-                int[][] possible_states = new int[afn.qt_letras][afn.num_estados];
+                int[][] possible_states = new int[afn.num_of_letters][afn.num_of_states];
                 do{
                     int index = 0;
                     System.out.println("Digite as transições entre os estados. Por exemplo: 0,a,1");
@@ -105,10 +105,10 @@ public class Flowchart {
                     int qi = Integer.parseInt(data[0]);
                     String element = data[1];
                     int qf = Integer.parseInt(data[2]);
-                    index = possible_states[Arrays.asList(afn.alfabeto).indexOf(element)][qi];
+                    index = possible_states[Arrays.asList(afn.alphabet).indexOf(element)][qi];
                     //Função + incrementação.
                     afn.setTransition(qi, element, qf, index);
-                    possible_states[Arrays.asList(afn.alfabeto).indexOf(element)][qi]++;
+                    possible_states[Arrays.asList(afn.alphabet).indexOf(element)][qi]++;
                     System.out.println("Deseja continuar? [S/N]");
                     answer = scan.next().toLowerCase().charAt(0);
                 }while(answer!='n');

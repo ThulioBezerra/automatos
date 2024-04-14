@@ -1,7 +1,6 @@
 package br.edu.lftc;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class AutomnFDeterminate implements InterfaceAutonomo{
     int num_states;
@@ -29,13 +28,13 @@ public class AutomnFDeterminate implements InterfaceAutonomo{
         String current_char="";
         while(i < chars.length()){
             current_char = chars.charAt(i++) + "";
-            for (int j = 0; j < qt_letras; j++) {
+            for (int j = 0; j < num_letters; j++) {
                 if (current_char.equals(this.alphabet[j])){
                     current_state = transictionTable[current_state][j];
                 }
             }
             }
-        if (Arrays.asList(final_states).contains(current_state)){
+        if (Arrays.asList(end_states).contains(current_state)){
             System.out.println("É possível");
         }else{
             System.out.println("Não é possivel");
@@ -51,6 +50,6 @@ public class AutomnFDeterminate implements InterfaceAutonomo{
 
     @Override
     public void setTransition(int qi, String element, int qf) {
-        transictionTable[qi][Arrays.asList(alfabeto).indexOf(element)] = qf;
+        transictionTable[qi][Arrays.asList(alphabet).indexOf(element)] = qf;
     }
 }
