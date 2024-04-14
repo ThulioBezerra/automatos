@@ -4,32 +4,32 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class AutomnFIndeterminate implements InterfaceAutonomo{
-    int num_estados;
-    int qt_letras;
-    String[] alfabeto;
-    Integer[] final_states;
+    int num_of_states;
+    int num_of_letters;
+    String[] alphabet;
+    Integer[] end_states;
     int initial_state;
     int[][][] transictionTable;
-    public AutomnFIndeterminate(int estados, int num_letras, String[] alfabetocompleto, Integer[] finais){
-        this.num_estados = estados;
-        this.qt_letras = num_letras;
-        this.alfabeto = alfabetocompleto;
-        transictionTable = new int[num_estados][qt_letras][num_estados];
-        this.final_states = finais;
+    public AutomnFIndeterminate(int states, int num_of_letters, String[] complete_alphabet, Integer[] end_states){
+        this.num_of_states = states;
+        this.num_of_letters = num_of_letters;
+        this.alphabet = complete_alphabet;
+        transictionTable = new int[num_of_states][num_of_letters][num_of_states];
+        this.end_states = end_states;
     }
 
     @Override
-    public boolean isPossible(String cadeia) {
+    public boolean isPossible(String chars) {
         int[] state_tests = {0}; //q0
-        int[] finalStates = test(cadeia, state_tests, 0);
-        if(aceppt(finalStates)){
+        int[] end_states = test(chars, state_tests, 0);
+        if(aceppt(end_states)){
             System.out.println("Palavra aceita!");
         }else System.out.println("Rejeitada!");
         return false;
     }
 
-    private int[] test(String cadeia, int[] stateTests, int i) {
-        if(i==cadeia.length()){
+    private int[] test(String chars, int[] stateTests, int i) {
+        if(i==chars.length()){
             if(aceppt(stateTests)){
                 return stateTests;
             }else {
@@ -37,14 +37,14 @@ public class AutomnFIndeterminate implements InterfaceAutonomo{
                 return null;
             }
         }
-        Integer simbolo = Arrays.asList(this.alfabeto).indexOf(cadeia.charAt(i)+ "");
-        for (int j = 0; j < num_estados ; j++) {
-            int[] novosEstados = transictionTable[j][simbolo];
-            if (novosEstados.length==0){
+        Integer symbol = Arrays.asList(this.alphabet).indexOf(chars.charAt(i)+ "");
+        for (int j = 0; j < num_of_states ; j++) {
+            int[] new_states = transictionTable[j][symbol];
+            if (new_states.length==0){
                 return null;
             }
-            int[] transicoes = test(cadeia,novosEstados,i+1);
-            if(transicoes != null) return transicoes;
+            int[] transitions = test(chars,new_states,i+1);
+            if(transitions != null) return transitions;
 
         }
         return null;
@@ -53,8 +53,8 @@ public class AutomnFIndeterminate implements InterfaceAutonomo{
     private boolean aceppt(int[] stateTests) {
         if (stateTests == null) return false;
         for (Integer state:stateTests) {
-            for (Integer final_state:this.final_states) {
-                if (state==final_state){
+            for (Integer end_state:this.end_states) {
+                if (state==end_state){
                     return true;
                 }
             }
@@ -64,7 +64,7 @@ public class AutomnFIndeterminate implements InterfaceAutonomo{
     }
 
     @Override
-    public int editAutonom(int estados, int num_letras, String[] alfabetocompleto) {
+    public int editAutonom(int states, int num_of_letters, String[] complete_alphabet) {
         return 0;
     }
 
@@ -74,13 +74,13 @@ public class AutomnFIndeterminate implements InterfaceAutonomo{
     }
     
     public void setTransition(int qi, String element, int qf, int i) {
-        transictionTable[qi][Arrays.asList(alfabeto).indexOf(element)][i] = qf;
+        transictionTable[qi][Arrays.asList(alphabet).indexOf(element)][i] = qf;
     }
 
     public void createTransition() {
-        for (int i = 0; i < num_estados; i++) {
-            for (int j = 0; j < qt_letras; j++) {
-                for (int k = 0; k < num_estados; k++) {
+        for (int i = 0; i < num_of_states; i++) {
+            for (int j = 0; j < num_of_letters; j++) {
+                for (int k = 0; k < num_of_states; k++) {
                     transictionTable[i][j][k] = -1;
                 }
             }
