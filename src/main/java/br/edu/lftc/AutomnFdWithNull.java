@@ -1,32 +1,30 @@
 package br.edu.lftc;
 
-import java.util.Scanner;
-
 public class AutomnFdWithNull implements InterfaceAutonomo{
-    int num_estados;
-    int qt_letras;
-    String[] alfabeto;
-    int[] final_states;
-    int initial_state;
-    String[][] transictionTable;
-    public AutomnFdWithNull(int estados, int num_letras, String[] alfabetocompleto){
-        this.num_estados = estados;
-        this.qt_letras = num_letras;
-        this.alfabeto = alfabetocompleto;
-        transictionTable = new String[num_estados][qt_letras];
+    int num_of_states;
+    int num_of_letters;
+    String[] alphabet;
+    Integer[] end_states;
+    int[][] transictionTable;
+    public AutomnFdWithNull(int states, int num_of_letters, String[] complete_alphabet, Integer[] end_states){
+        this.num_of_states = states;
+        this.num_of_letters = num_of_letters;
+        this.alphabet = complete_alphabet;
+        transictionTable = new int[num_of_states][num_of_letters];
+        this.end_states = end_states;
     }
     @Override
-    public boolean isPossible(String[] alfabeto) {
+    public boolean isPossible(String alphabet) {
         return false;
     }
 
     @Override
-    public int editAutonom(int estados, int num_letras, String[] alfabetocompleto) {
+    public int editAutonom(int states, int num_of_letters, String[] complete_alphabet) {
         return 0;
     }
 
     @Override
-    public int setTransition(int qi, char element, int qf) {
-        return 0;
+    public void setTransition(int qi, String element, int qf) {
+
     }
 }

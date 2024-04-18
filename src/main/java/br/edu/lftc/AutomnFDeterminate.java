@@ -1,40 +1,55 @@
 package br.edu.lftc;
 
-import java.util.Scanner;
+import java.util.Arrays;
 
 public class AutomnFDeterminate implements InterfaceAutonomo{
-    int num_estados;
-    int qt_letras;
-    String[] alfabeto;
-    int[] final_states;
+    int num_states;
+    int num_letters;
+    String[] alphabet;
+    Integer[] end_states;
+    //Esse estado sempre será o q0 por padrão
     int initial_state;
-    String[][] transictionTable;
-    public AutomnFDeterminate(int estados, int num_letras, String[] alfabetocompleto){
-        this.num_estados = estados;
-        this.qt_letras = num_letras;
-        this.alfabeto = alfabetocompleto;
-        transictionTable = new String[num_estados][qt_letras];
-    }
-    public void init(){
-        boolean determinate = true;
-        do{
-            System.out.println("""
-                    Digite as transições entre os estados e o seu valor. Por exemplo: 0,a,1
-                    """);
-        }while(determinate==true);
-    }
-    @Override
-    public boolean isPossible(String[] alfabeto) {
-        return false;
+    int[][]transictionTable;
+    public AutomnFDeterminate(int states, int num_letters, String[] complete_alphabet, Integer[] end_states){
+        this.num_states = states;
+        this.num_letters = num_letters;
+        this.alphabet = complete_alphabet;
+        transictionTable = new int[num_states][num_letters];
+        this.end_states = end_states;
+        /* * a  b
+        * q0 0  1
+        * q1 1  0
+        * */
     }
 
     @Override
-    public int editAutonom(int estados, int num_letras, String[] alfabetocompleto) {
+    public boolean isPossible(String chars) {
+        int current_state=0,i=0;
+        String current_char="";
+        while(i < chars.length()){
+            current_char = chars.charAt(i++) + "";
+            for (int j = 0; j < num_letters; j++) {
+                if (current_char.equals(this.alphabet[j])){
+                    current_state = transictionTable[current_state][j];
+                }
+            }
+            }
+        if (Arrays.asList(end_states).contains(current_state)){
+            System.out.println("É possível");
+        }else{
+            System.out.println("Não é possivel");
+        }
+
+        return true;
+    }
+
+    @Override
+    public int editAutonom(int states, int num_letters, String[] complete_alphabet) {
         return 0;
     }
 
     @Override
-    public int setTransition(int qi, char element, int qf) {
-        return 0;
+    public void setTransition(int qi, String element, int qf) {
+        transictionTable[qi][Arrays.asList(alphabet).indexOf(element)] = qf;
     }
 }
