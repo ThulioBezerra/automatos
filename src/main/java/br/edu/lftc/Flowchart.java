@@ -9,7 +9,6 @@ public class Flowchart {
     public static AutomnFdWithNull afne;
     public static AutomnFIndeterminate afn;
     public static void init(){
-        boolean solved = true;
         int menu_option = 0;
         String chars;
         do {
@@ -23,6 +22,7 @@ public class Flowchart {
                 "0- Sair\n"
             );
             menu_option = Integer.parseInt(scan.next());
+            if (menu_option==0) continue;
             createAutomn(menu_option);
             createTransitions(menu_option);
             char answer;
@@ -38,13 +38,14 @@ public class Flowchart {
                         afn.isPossible(chars);
                         break;
                     case 3:
+                        afne = new AutomnFdWithNull();
                         afne.isPossible(chars);
                         break;
                 }
                 System.out.println("Quer digitar uma nova? [S/N]");
                 answer = scan.next().toLowerCase().charAt(0);
             }while(answer != 'n');
-            } while (solved != true);
+        }while (menu_option != 0);
 
     }
 
@@ -52,7 +53,7 @@ public class Flowchart {
         int number_of_states, number_of_letters;
         Integer[] end_states;
         String[] letters;
-        if (typeAuto > 0 || typeAuto <= 3) {
+        if (typeAuto > 0 && typeAuto <= 2) {
             System.out.println("Quantas letras tem seu alfabeto? ");
             number_of_letters = Integer.parseInt(scan.next());
             System.out.println("Quantas estados tem seu automato? ");
@@ -75,8 +76,6 @@ public class Flowchart {
                     break;
                 case 2:
                     afn = new AutomnFIndeterminate(number_of_states,number_of_letters,letters,end_states);
-                    break;
-                case 3:
                     break;
             }
     }
@@ -114,13 +113,6 @@ public class Flowchart {
                 }while(answer!='n');
                 break;
             case 3:
-                do{
-                    System.out.println("Digite as transições entre os estados. Por exemplo: 0,a,1 ou 0,null,2 para ε");
-                    String[] data = scan.next().split(",");
-                    afd.setTransition(Integer.parseInt(data[0]), data[1], Integer.parseInt(data[2]));
-                    System.out.println("Deseja continuar? [S/N]");
-                    answer = scan.next().toLowerCase().charAt(0);
-                }while(answer!='n');
                 break;
             case 0:
                 break;

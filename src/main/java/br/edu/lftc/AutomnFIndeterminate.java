@@ -29,15 +29,17 @@ public class AutomnFIndeterminate implements InterfaceAutonomo{
 
     private int[] test(String chars, int[] stateTests, int i) {
         if(i==chars.length()){
+            imprimeCI(chars, stateTests[0], i);
+            System.out.println("");
             if(aceppt(stateTests)){
                 return stateTests;
             }else {
-                System.out.println("<<<BackTrack>>> fim da cadeia");
                 return null;
             }
         }
         Integer symbol = Arrays.asList(this.alphabet).indexOf(chars.charAt(i)+ "");
         for (int j = 0; j < num_of_states ; j++) {
+            imprimeCI(chars, stateTests[j], i);
             int[] new_states = transictionTable[j][symbol];
             if (new_states.length==0){
                 return null;
@@ -57,19 +59,11 @@ public class AutomnFIndeterminate implements InterfaceAutonomo{
                     return true;
                 }
             }
-
         }
         return false;
     }
-
-    @Override
-    public int editAutonom(int states, int num_of_letters, String[] complete_alphabet) {
-        return 0;
-    }
-
     @Override
     public void setTransition(int qi, String element, int qf) {
-
     }
     
     public void setTransition(int qi, String element, int qf, int i) {
@@ -84,5 +78,10 @@ public class AutomnFIndeterminate implements InterfaceAutonomo{
                 }
             }
         }
+    }
+    public static void imprimeCI(String cadeia, int estado, int posicao) {
+        System.out.print(cadeia.substring(0, posicao));
+        System.out.print("[q" + estado+"]");
+        System.out.println(cadeia.substring(posicao));
     }
 }

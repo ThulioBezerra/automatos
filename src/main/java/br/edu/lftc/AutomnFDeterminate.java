@@ -26,7 +26,9 @@ public class AutomnFDeterminate implements InterfaceAutonomo{
     public boolean isPossible(String chars) {
         int current_state=0,i=0;
         String current_char="";
+
         while(i < chars.length()){
+            imprimeCI(chars,current_state, i);
             current_char = chars.charAt(i++) + "";
             for (int j = 0; j < num_letters; j++) {
                 if (current_char.equals(this.alphabet[j])){
@@ -39,17 +41,17 @@ public class AutomnFDeterminate implements InterfaceAutonomo{
         }else{
             System.out.println("Não é possivel");
         }
-
+        imprimeCI(chars,current_state, i);
         return true;
-    }
-
-    @Override
-    public int editAutonom(int states, int num_letters, String[] complete_alphabet) {
-        return 0;
     }
 
     @Override
     public void setTransition(int qi, String element, int qf) {
         transictionTable[qi][Arrays.asList(alphabet).indexOf(element)] = qf;
+    }
+    public static void imprimeCI(String cadeia, int estado, int posicao) {
+        System.out.print(cadeia.substring(0, posicao));
+        System.out.print("[q" + estado+"]");
+        System.out.println(cadeia.substring(posicao));
     }
 }
