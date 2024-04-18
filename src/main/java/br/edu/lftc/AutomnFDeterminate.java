@@ -36,12 +36,12 @@ public class AutomnFDeterminate implements InterfaceAutonomo{
                 }
             }
             }
+        imprimeCI(chars,current_state, i);
         if (Arrays.asList(end_states).contains(current_state)){
             System.out.println("É possível");
         }else{
             System.out.println("Não é possivel");
         }
-        imprimeCI(chars,current_state, i);
         return true;
     }
 

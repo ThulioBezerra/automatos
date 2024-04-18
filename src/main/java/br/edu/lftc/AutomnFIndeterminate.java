@@ -39,7 +39,7 @@ public class AutomnFIndeterminate implements InterfaceAutonomo{
         }
         Integer symbol = Arrays.asList(this.alphabet).indexOf(chars.charAt(i)+ "");
         for (int j = 0; j < num_of_states ; j++) {
-            imprimeCI(chars, stateTests[j], i);
+            imprimeCI(chars, j, i);
             int[] new_states = transictionTable[j][symbol];
             if (new_states.length==0){
                 return null;

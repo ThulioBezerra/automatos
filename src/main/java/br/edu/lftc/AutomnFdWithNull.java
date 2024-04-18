@@ -4,13 +4,18 @@ import java.util.Arrays;
 import java.util.TreeSet;
 
 public class AutomnFdWithNull implements InterfaceAutonomo{
-
+    //Precisa ter um 0 entre os caracteres. Deve começar com 0e terminar com 0.
+    /*   0   1  2   null
+    * q0 q1  -  -    -
+    * q1 -  q2  q2   q0
+    * q2 -   -  -    q0
+    * */
     int[][][] transictionTable = { { { 1 }, {}, {} },
             { {}, { 2 }, { 2 } },
             { {}, {}, {} } };
 
     int[][] transictionTableNull = { {}, { 0 }, { 0 } };
-    String[] alphabet = {"0","1"};
+    String[] alphabet = {"0","1","2"};
     int[] end_states = {1};
 
     @Override
